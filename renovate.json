@@ -1,0 +1,44 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "(^|/)\\.kempt\\.toml$"
+      ],
+      "matchStrings": [
+        "\\[ktfmt\\][^\\[]*?version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      "datasourceTemplate": "maven",
+      "registryUrlTemplate": "https://repo1.maven.org/maven2",
+      "depNameTemplate": "com.facebook:ktfmt"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "(^|/)\\.kempt\\.toml$"
+      ],
+      "matchStrings": [
+        "\\[gjf\\][^\\[]*?version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      "datasourceTemplate": "maven",
+      "registryUrlTemplate": "https://repo1.maven.org/maven2",
+      "depNameTemplate": "com.google.googlejavaformat:google-java-format"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "(^|/)\\.kempt\\.toml$"
+      ],
+      "matchStrings": [
+        "\\[gradle-dependencies-sorter\\][^\\[]*?version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      "datasourceTemplate": "maven",
+      "registryUrlTemplate": "https://repo1.maven.org/maven2",
+      "depNameTemplate": "com.squareup:sort-gradle-dependencies-app"
+    }
+  ]
+}

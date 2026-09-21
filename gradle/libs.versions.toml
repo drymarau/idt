@@ -1,0 +1,31 @@
+[versions]
+android = "9.4.1"
+compose = "1.12.0"
+kotlin = "2.4.20"
+metro = "1.4.4"
+
+[libraries]
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version = "1.13.0" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version = "1.8.0" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.19.0" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version = "1.2.0" }
+compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "compose" }
+compose-ui-tooling = { module = "org.jetbrains.compose.ui:ui-tooling", version.ref = "compose" }
+compose-ui-tooling-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "compose" }
+detekt-compose = { module = "io.nlopez.compose.rules:detekt", version = "0.6.6" }
+metrox-android = { module = "dev.zacsweers.metro:metrox-android", version.ref = "metro" }
+
+plugin-android = { module = "com.android.tools.build:gradle", version.ref = "android" }
+plugin-android-settings = { module = "com.android.settings:com.android.settings.gradle.plugin", version.ref = "android" }
+plugin-compose = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "compose" }
+plugin-detekt = { module = "dev.detekt:detekt-gradle-plugin", version = "2.0.0-alpha.6" }
+plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+plugin-kotlin-compose = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
+plugin-kotlin-powerAssert = { module = "org.jetbrains.kotlin.plugin.power-assert:org.jetbrains.kotlin.plugin.power-assert.gradle.plugin", version.ref = "kotlin" }
+plugin-licensee = { module = "app.cash.licensee:licensee-gradle-plugin", version = "1.14.1" }
+
+[plugins]
+kotlin-android-application = { id = "com.dzmitryrymarau.idt.kotlin.android.application" }
+kotlin-compose = { id = "com.dzmitryrymarau.idt.kotlin.compose" }
+kotlin-multiplatform-library = { id = "com.dzmitryrymarau.idt.kotlin.multiplatform.library" }
+metro = { id = "dev.zacsweers.metro", version.ref = "metro" }

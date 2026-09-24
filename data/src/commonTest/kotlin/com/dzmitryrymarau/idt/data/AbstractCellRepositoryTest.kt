@@ -1,15 +1,19 @@
+@file:OptIn(ExperimentalAtomicApi::class)
+
 package com.dzmitryrymarau.idt.data
 
-import app.cash.sqldelight.adapter.primitive.IntColumnAdapter
 import app.cash.sqldelight.async.coroutines.awaitAsList
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.turbine.test
-import kotlin.random.Random
+import com.dzmitryrymarau.idt.data.internal.CellRepositoryImpl
+import com.dzmitryrymarau.idt.data.internal.Database
+import kotlin.concurrent.atomics.ExperimentalAtomicApi
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.fail
 import kotlinx.coroutines.test.runTest
 
 abstract class AbstractCellRepositoryTest {
@@ -22,18 +26,9 @@ abstract class AbstractCellRepositoryTest {
 
   @BeforeTest
   fun setUp() {
-    val cellAdapter =
-      Cell.Adapter(
-        rowAdapter = IntColumnAdapter,
-        columnAdapter = IntColumnAdapter,
-      )
     driver = createDriver()
-    database = Database(driver, cellAdapter)
-    repository =
-      CellRepositoryImpl(
-        database = database,
-        dataSource = RandomStringDataSource(random = Random(0)),
-      )
+    database = Database(driver)
+    repository = CellRepositoryImpl(database)
   }
 
   @AfterTest
@@ -44,22 +39,30 @@ abstract class AbstractCellRepositoryTest {
   @Test
   fun `populate throws IllegalArgumentException if either rows or columns is 0 or less`() =
     runTest {
-      assertFailsWith<IllegalArgumentException> { repository.populate(rows = 0, columns = 1) }
-      assertFailsWith<IllegalArgumentException> { repository.populate(rows = 1, columns = 0) }
+      assertFailsWith<IllegalArgumentException> {
+        repository.populate(rows = 0, columns = 1) { _, _ -> fail("Should not be called") }
+      }
+      assertFailsWith<IllegalArgumentException> {
+        repository.populate(rows = 1, columns = 0) { _, _ -> fail("Should not be called") }
+      }
     }
 
   @Test
   fun `populate fills the table with expected values`() = runTest {
-    repository.populate(rows = 3, columns = 2)
+    val rows = 3
+    val columns = 2
+    repository.populate(rows = rows, columns = columns) { row, column ->
+      (row * columns + column).toString()
+    }
     assertEquals(
       expected =
         listOf(
-          Cell(row = 0, column = 0, content = "0qbNCJxn", checked = false),
-          Cell(row = 0, column = 1, content = "OPAgguFM", checked = false),
-          Cell(row = 1, column = 0, content = "Ixvc5t0i", checked = false),
-          Cell(row = 1, column = 1, content = "aHziLhGc", checked = false),
-          Cell(row = 2, column = 0, content = "YlosHFVR", checked = false),
-          Cell(row = 2, column = 1, content = "h8PFloHV", checked = false),
+          Cell(row = 0, column = 0, content = "0", checked = false),
+          Cell(row = 0, column = 1, content = "1", checked = false),
+          Cell(row = 1, column = 0, content = "2", checked = false),
+          Cell(row = 1, column = 1, content = "3", checked = false),
+          Cell(row = 2, column = 0, content = "4", checked = false),
+          Cell(row = 2, column = 1, content = "5", checked = false),
         ),
       actual = database.cellQueries.select().awaitAsList(),
     )
@@ -78,23 +81,31 @@ abstract class AbstractCellRepositoryTest {
 
   @Test
   fun `updateChecked updates the correct cell`() = runTest {
-    repository.populate(rows = 1, columns = 1)
+    val rows = 1
+    val columns = 1
+    repository.populate(rows = rows, columns = columns) { row, column ->
+      (row * columns + column).toString()
+    }
     assertEquals(
-      expected = listOf(Cell(row = 0, column = 0, content = "0qbNCJxn", checked = false)),
+      expected = listOf(Cell(row = 0, column = 0, content = "0", checked = false)),
       actual = database.cellQueries.select().awaitAsList(),
     )
     repository.updatedChecked(row = 0, column = 0, checked = true)
     assertEquals(
-      expected = listOf(Cell(row = 0, column = 0, content = "0qbNCJxn", checked = true)),
+      expected = listOf(Cell(row = 0, column = 0, content = "0", checked = true)),
       actual = database.cellQueries.select().awaitAsList(),
     )
   }
 
   @Test
   fun `clear deletes the contents of the table`() = runTest {
-    repository.populate(rows = 1, columns = 1)
+    val rows = 1
+    val columns = 1
+    repository.populate(rows = rows, columns = columns) { row, column ->
+      (row * columns + column).toString()
+    }
     assertEquals(
-      expected = listOf(Cell(row = 0, column = 0, content = "0qbNCJxn", checked = false)),
+      expected = listOf(Cell(row = 0, column = 0, content = "0", checked = false)),
       actual = database.cellQueries.select().awaitAsList(),
     )
     repository.clear()
@@ -110,15 +121,19 @@ abstract class AbstractCellRepositoryTest {
       // Initially empty
       assertEquals(expected = emptyList(), actual = awaitItem())
       // Single row, single column
-      repository.populate(rows = 1, columns = 1)
+      val rows = 1
+      val columns = 1
+      repository.populate(rows = rows, columns = columns) { row, column ->
+        (row * columns + column).toString()
+      }
       assertEquals(
-        expected = listOf(Cell(row = 0, column = 0, content = "0qbNCJxn", checked = false)),
+        expected = listOf(Cell(row = 0, column = 0, content = "0", checked = false)),
         actual = awaitItem(),
       )
       // Set checked to true
       repository.updatedChecked(row = 0, column = 0, checked = true)
       assertEquals(
-        expected = listOf(Cell(row = 0, column = 0, content = "0qbNCJxn", checked = true)),
+        expected = listOf(Cell(row = 0, column = 0, content = "0", checked = true)),
         actual = awaitItem(),
       )
       // Set checked to true on the same cell

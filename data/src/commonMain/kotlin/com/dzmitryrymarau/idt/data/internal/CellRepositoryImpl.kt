@@ -1,22 +1,26 @@
-package com.dzmitryrymarau.idt.data
+package com.dzmitryrymarau.idt.data.internal
 
+import com.dzmitryrymarau.idt.data.Cell
+import com.dzmitryrymarau.idt.data.CellRepository
+import com.dzmitryrymarau.idt.data.Database
 import com.eygraber.sqldelight.androidx.driver.coroutines.asFlow
 import com.eygraber.sqldelight.androidx.driver.coroutines.mapToList
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 
-public class CellRepositoryImpl(
-  private val database: Database,
-  private val dataSource: RandomStringDataSource,
-) : CellRepository {
+internal class CellRepositoryImpl(private val database: Database) : CellRepository {
 
-  override suspend fun populate(rows: Int, columns: Int) {
+  override suspend fun populate(
+    rows: Int,
+    columns: Int,
+    content: (row: Int, column: Int) -> String,
+  ) {
     require(rows > 0) { "rows must be greater than 0." }
     require(columns > 0) { "columns must be greater than 0." }
     database.transaction {
       repeat(rows) { row ->
         repeat(columns) { column ->
-          database.cellQueries.insert(row = row, column = column, content = dataSource.generate())
+          database.cellQueries.insert(row = row, column = column, content = content(row, column))
         }
       }
     }

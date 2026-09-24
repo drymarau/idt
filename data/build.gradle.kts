@@ -8,8 +8,9 @@ plugins {
 kotlin {
   sourceSets {
     commonMain.dependencies {
+      api(libs.kotlinx.coroutines.core)
+
       implementation(libs.androidx.sqlite.bundled)
-      implementation(libs.kotlinx.coroutines.core)
       implementation(libs.sqldelight.adapters.primitive)
       implementation(libs.sqldelight.driver.androidx)
       implementation(libs.sqldelight.extensions.coroutines)

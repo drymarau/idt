@@ -15,6 +15,9 @@ SELECT * FROM cell;
 insert:
 INSERT INTO cell(row, column, content) VALUES (?, ?, ?);
 
+updateContent:
+UPDATE cell SET content = ? WHERE row = ? AND column = ?;
+
 updateChecked:
 UPDATE cell SET checked = ? WHERE row = ? AND column = ?;
 

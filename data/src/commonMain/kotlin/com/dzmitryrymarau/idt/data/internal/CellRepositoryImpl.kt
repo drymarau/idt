@@ -26,6 +26,15 @@ internal class CellRepositoryImpl(private val database: Database) : CellReposito
     }
   }
 
+  override suspend fun updateContent(row: Int, column: Int, content: String) {
+    require(row >= 0) { "row must be greater or equal to 0" }
+    require(column >= 0) { "column must be greater or equal to 0" }
+    require(content.isNotBlank()) { "content must not be blank." }
+    database.transaction {
+      database.cellQueries.updateContent(content = content, row = row, column = column)
+    }
+  }
+
   override suspend fun updatedChecked(
     row: Int,
     column: Int,
@@ -44,6 +53,6 @@ internal class CellRepositoryImpl(private val database: Database) : CellReposito
     }
   }
 
-  override suspend fun getCells(): Flow<List<Cell>> =
+  override fun getCells(): Flow<List<Cell>> =
     database.cellQueries.select().asFlow().mapToList().distinctUntilChanged()
 }

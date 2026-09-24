@@ -69,7 +69,43 @@ abstract class AbstractCellRepositoryTest {
   }
 
   @Test
-  fun `updateChecked throws IllegalArgument exception if either row or column is less than 0`() =
+  fun `updateContent throws IllegalArgumentException if either row or column is less than 0`() =
+    runTest {
+      assertFailsWith<IllegalArgumentException> {
+        repository.updateContent(row = -1, column = 0, content = "0")
+      }
+      assertFailsWith<IllegalArgumentException> {
+        repository.updateContent(row = 0, column = -1, content = "0")
+      }
+    }
+
+  @Test
+  fun `updateContent throws IllegalArgumentException if content is blank`() = runTest {
+    assertFailsWith<IllegalArgumentException> {
+      repository.updateContent(row = -1, column = 0, content = " ")
+    }
+  }
+
+  @Test
+  fun `updateContent updates the correct cell`() = runTest {
+    val rows = 1
+    val columns = 1
+    repository.populate(rows = rows, columns = columns) { row, column ->
+      (row * columns + column).toString()
+    }
+    assertEquals(
+      expected = listOf(Cell(row = 0, column = 0, content = "0", checked = false)),
+      actual = database.cellQueries.select().awaitAsList(),
+    )
+    repository.updateContent(row = 0, column = 0, content = "1")
+    assertEquals(
+      expected = listOf(Cell(row = 0, column = 0, content = "1", checked = false)),
+      actual = database.cellQueries.select().awaitAsList(),
+    )
+  }
+
+  @Test
+  fun `updateChecked throws IllegalArgumentException if either row or column is less than 0`() =
     runTest {
       assertFailsWith<IllegalArgumentException> {
         repository.updatedChecked(row = -1, column = 0, checked = false)

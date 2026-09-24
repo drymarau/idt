@@ -11,9 +11,5 @@ dependencies {
   implementation(libs.androidx.appcompat)
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.core.splashscreen)
-  implementation(libs.compose.foundation)
-  implementation(libs.compose.ui.tooling.preview)
   implementation(libs.metrox.android)
-
-  debugImplementation(libs.compose.ui.tooling)
 }

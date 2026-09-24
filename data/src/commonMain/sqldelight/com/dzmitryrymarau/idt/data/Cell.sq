@@ -1,0 +1,22 @@
+import kotlin.Boolean;
+import kotlin.Int;
+
+CREATE TABLE cell (
+    row INTEGER AS Int NOT NULL,
+    column INTEGER AS Int NOT NULL,
+    content TEXT NOT NULL,
+    checked INTEGER AS Boolean NOT NULL DEFAULT 0,
+    PRIMARY KEY (row, column)
+);
+
+select:
+SELECT * FROM cell;
+
+insert:
+INSERT INTO cell(row, column, content) VALUES (?, ?, ?);
+
+updateChecked:
+UPDATE cell SET checked = ? WHERE row = ? AND column = ?;
+
+delete:
+DELETE FROM cell;

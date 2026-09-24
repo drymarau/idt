@@ -30,7 +30,10 @@ class KotlinMultiplatformLibraryPlugin : Plugin<Project> {
         "androidx.compose.foundation.style.ExperimentalFoundationStyleApi"
       )
       compilerOptions.progressiveMode.set(true)
-      compilerOptions.freeCompilerArgs.addAll("-Xname-based-destructuring=complete")
+      compilerOptions.freeCompilerArgs.addAll(
+        "-Xexpect-actual-classes",
+        "-Xname-based-destructuring=complete",
+      )
       targets.named<KotlinMultiplatformAndroidLibraryTarget>("android") {
         namespace = target.namespace
         compilerOptions.jvmTarget.set(JvmTarget)

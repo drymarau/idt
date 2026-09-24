@@ -22,6 +22,14 @@ class DetektPlugin : Plugin<Project> {
       }
     }
     target.configure<DetektExtension> {
+      source.setFrom(
+        "src/main/kotlin",
+        "src/test/kotlin",
+        "src/commonMain/kotlin",
+        "src/commonTest/kotlin",
+        "src/androidMain/kotlin",
+        "src/androidHostTest/kotlin",
+      )
       config.setFrom("../config/detekt/config.yml")
       parallel.set(true)
       buildUponDefaultConfig.set(true)

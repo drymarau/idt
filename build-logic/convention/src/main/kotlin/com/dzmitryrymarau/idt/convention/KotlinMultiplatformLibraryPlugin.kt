@@ -5,7 +5,6 @@ import com.dzmitryrymarau.idt.convention.internal.JvmTarget
 import com.dzmitryrymarau.idt.convention.internal.isIncludeAndroidResources
 import com.dzmitryrymarau.idt.convention.internal.namespace
 import com.dzmitryrymarau.idt.convention.internal.pluginManager
-import dev.detekt.gradle.plugin.DetektPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply

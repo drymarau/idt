@@ -20,6 +20,7 @@ compose-ui-tooling-preview = { module = "org.jetbrains.compose.ui:ui-tooling-pre
 detekt-compose = { module = "io.nlopez.compose.rules:detekt", version = "0.6.6" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
+kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version = "1.11.0" }
 metrox-android = { module = "dev.zacsweers.metro:metrox-android", version.ref = "metro" }
 sqldelight-adapters-primitive = { module = "app.cash.sqldelight:primitive-adapters", version.ref = "sqldelight" }
 sqldelight-driver-androidx = { module = "com.eygraber:sqldelight-androidx-driver", version.ref = "sqldelight-driver-androidx" }
@@ -39,5 +40,6 @@ plugin-licensee = { module = "app.cash.licensee:licensee-gradle-plugin", version
 kotlin-android-application = { id = "com.dzmitryrymarau.idt.kotlin.android.application" }
 kotlin-compose = { id = "com.dzmitryrymarau.idt.kotlin.compose" }
 kotlin-multiplatform-library = { id = "com.dzmitryrymarau.idt.kotlin.multiplatform.library" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 metro = { id = "dev.zacsweers.metro", version.ref = "metro" }
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }

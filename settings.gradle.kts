@@ -22,3 +22,5 @@ plugins { id("com.dzmitryrymarau.idt.settings") }
 include(":app-android")
 
 include(":data")
+
+include(":domain")

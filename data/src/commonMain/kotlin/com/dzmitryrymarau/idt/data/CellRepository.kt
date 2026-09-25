@@ -17,5 +17,8 @@ public interface CellRepository {
 
   public suspend fun clear(sessionId: Uuid)
 
-  public fun getCells(sessionId: Uuid): Flow<List<Cell>>
+  public fun <T : Any> getCells(
+    sessionId: Uuid,
+    mapper: (sessionId: Uuid, row: Int, column: Int, content: String, checked: Boolean) -> T,
+  ): Flow<List<T>>
 }

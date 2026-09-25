@@ -1,6 +1,5 @@
 package com.dzmitryrymarau.idt.data.internal
 
-import com.dzmitryrymarau.idt.data.Cell
 import com.dzmitryrymarau.idt.data.CellRepository
 import com.dzmitryrymarau.idt.data.Database
 import com.eygraber.sqldelight.androidx.driver.coroutines.asFlow
@@ -72,6 +71,9 @@ internal class CellRepositoryImpl(private val database: Database) : CellReposito
     }
   }
 
-  override fun getCells(sessionId: Uuid): Flow<List<Cell>> =
-    database.cellQueries.select(sessionId).asFlow().mapToList().distinctUntilChanged()
+  override fun <T : Any> getCells(
+    sessionId: Uuid,
+    mapper: (sessionId: Uuid, row: Int, column: Int, content: String, checked: Boolean) -> T,
+  ): Flow<List<T>> =
+    database.cellQueries.select(sessionId, mapper).asFlow().mapToList().distinctUntilChanged()
 }

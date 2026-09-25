@@ -240,7 +240,7 @@ abstract class AbstractCellRepositoryTest {
         (row * columns + column).toString()
       }
     assertNotEquals(illegal = Uuid.NIL, actual = sessionId2)
-    repository.getCells(sessionId1).test {
+    repository.getCells(sessionId1, ::Cell).test {
       assertEquals(
         expected =
           listOf(Cell(sessionId = sessionId1, row = 0, column = 0, content = "0", checked = false)),

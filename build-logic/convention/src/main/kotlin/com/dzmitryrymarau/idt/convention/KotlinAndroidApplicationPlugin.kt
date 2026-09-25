@@ -111,7 +111,8 @@ class KotlinAndroidApplicationPlugin : Plugin<Project> {
     }
     target.configure<KotlinAndroidProjectExtension> {
       compilerOptions.optIn.addAll(
-        "androidx.compose.foundation.style.ExperimentalFoundationStyleApi"
+        "kotlin.uuid.ExperimentalUuidApi",
+        "androidx.compose.foundation.style.ExperimentalFoundationStyleApi",
       )
       compilerOptions.progressiveMode.set(true)
       compilerOptions.freeCompilerArgs.addAll("-Xname-based-destructuring=complete")

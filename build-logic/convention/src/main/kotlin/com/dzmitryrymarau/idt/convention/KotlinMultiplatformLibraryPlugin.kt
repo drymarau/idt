@@ -26,7 +26,8 @@ class KotlinMultiplatformLibraryPlugin : Plugin<Project> {
     target.configure<KotlinMultiplatformExtension> {
       explicitApi = ExplicitApiMode.Strict
       compilerOptions.optIn.addAll(
-        "androidx.compose.foundation.style.ExperimentalFoundationStyleApi"
+        "kotlin.uuid.ExperimentalUuidApi",
+        "androidx.compose.foundation.style.ExperimentalFoundationStyleApi",
       )
       compilerOptions.progressiveMode.set(true)
       compilerOptions.freeCompilerArgs.addAll(

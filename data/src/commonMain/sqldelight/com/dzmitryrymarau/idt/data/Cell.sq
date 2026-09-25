@@ -1,25 +1,30 @@
 import kotlin.Boolean;
 import kotlin.Int;
+import kotlin.uuid.Uuid;
 
 CREATE TABLE cell (
+    sessionId TEXT AS Uuid NOT NULL,
     row INTEGER AS Int NOT NULL,
     column INTEGER AS Int NOT NULL,
     content TEXT NOT NULL,
     checked INTEGER AS Boolean NOT NULL DEFAULT 0,
-    PRIMARY KEY (row, column)
+    PRIMARY KEY (sessionId, row, column)
 );
 
 select:
-SELECT * FROM cell;
+SELECT * FROM cell WHERE sessionId = ?;
 
 insert:
-INSERT INTO cell(row, column, content) VALUES (?, ?, ?);
+INSERT INTO cell(sessionId, row, column, content) VALUES (?, ?, ?, ?);
 
 updateContent:
-UPDATE cell SET content = ? WHERE row = ? AND column = ?;
+UPDATE cell SET content = ? WHERE sessionId = ? AND row = ? AND column = ?;
 
 updateChecked:
-UPDATE cell SET checked = ? WHERE row = ? AND column = ?;
+UPDATE cell SET checked = ? WHERE sessionId = ? AND row = ? AND column = ?;
 
 delete:
-DELETE FROM cell;
+DELETE FROM cell WHERE sessionId = ?;
+
+_select:
+SELECT * FROM cell;

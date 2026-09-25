@@ -1,16 +1,21 @@
 package com.dzmitryrymarau.idt.data
 
+import kotlin.uuid.Uuid
 import kotlinx.coroutines.flow.Flow
 
 public interface CellRepository {
 
-  public suspend fun populate(rows: Int, columns: Int, content: (row: Int, column: Int) -> String)
+  public suspend fun populate(
+    rows: Int,
+    columns: Int,
+    content: (row: Int, column: Int) -> String,
+  ): Uuid
 
-  public suspend fun updateContent(row: Int, column: Int, content: String)
+  public suspend fun updateContent(sessionId: Uuid, row: Int, column: Int, content: String)
 
-  public suspend fun updatedChecked(row: Int, column: Int, checked: Boolean)
+  public suspend fun updatedChecked(sessionId: Uuid, row: Int, column: Int, checked: Boolean)
 
-  public suspend fun clear()
+  public suspend fun clear(sessionId: Uuid)
 
-  public fun getCells(): Flow<List<Cell>>
+  public fun getCells(sessionId: Uuid): Flow<List<Cell>>
 }

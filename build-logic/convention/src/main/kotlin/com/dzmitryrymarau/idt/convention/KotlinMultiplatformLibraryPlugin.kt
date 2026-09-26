@@ -25,10 +25,7 @@ class KotlinMultiplatformLibraryPlugin : Plugin<Project> {
     }
     target.configure<KotlinMultiplatformExtension> {
       explicitApi = ExplicitApiMode.Strict
-      compilerOptions.optIn.addAll(
-        "kotlin.uuid.ExperimentalUuidApi",
-        "androidx.compose.foundation.style.ExperimentalFoundationStyleApi",
-      )
+      compilerOptions.optIn.addAll("kotlin.uuid.ExperimentalUuidApi")
       compilerOptions.progressiveMode.set(true)
       compilerOptions.freeCompilerArgs.addAll(
         "-Xexpect-actual-classes",

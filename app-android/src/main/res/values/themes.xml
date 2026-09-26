@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <style name="Theme.Idt" parent="Theme.AppCompat.Light.NoActionBar" />
-
-    <style name="Theme.Idt.SplashScreen" parent="Theme.SplashScreen">
-        <item name="postSplashScreenTheme">@style/Theme.Idt</item>
-    </style>
-</resources>

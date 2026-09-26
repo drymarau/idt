@@ -16,3 +16,9 @@ complexity:
 style:
   MagicNumber:
     ignorePropertyDeclaration: true
+  UnusedPrivateFunction:
+    ignoreAnnotated: [ 'Preview', 'PreviewTablet' ]
+
+Compose:
+  CompositionLocalAllowlist:
+    allowedCompositionLocals: [ 'LocalColorScheme' ]

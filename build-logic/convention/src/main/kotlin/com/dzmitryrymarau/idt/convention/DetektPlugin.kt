@@ -17,9 +17,6 @@ class DetektPlugin : Plugin<Project> {
   override fun apply(target: Project) {
     target.pluginManager {
       apply("dev.detekt")
-      withPlugin("org.jetbrains.kotlin.plugin.compose") {
-        target.dependencies { "detektPlugins"(target.libs.findLibrary("detekt-compose").get()) }
-      }
     }
     target.configure<DetektExtension> {
       source.setFrom(
@@ -34,6 +31,7 @@ class DetektPlugin : Plugin<Project> {
       parallel.set(true)
       buildUponDefaultConfig.set(true)
     }
+    target.dependencies { "detektPlugins"(target.libs.findLibrary("detekt-compose").get()) }
     target.tasks.withType<Detekt> { jvmTarget.set(JvmTarget.target) }
     target.tasks.withType<DetektCreateBaselineTask> { jvmTarget.set(JvmTarget.target) }
   }

@@ -35,4 +35,6 @@ include(":app-android")
 
 include(":data")
 
+include(":design")
+
 include(":domain")

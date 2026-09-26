@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Idt" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="background">@color/background</item>
+    </style>
+
+    <style name="Theme.Idt.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/background</item>
+        <item name="postSplashScreenTheme">@style/Theme.Idt</item>
+    </style>
+</resources>

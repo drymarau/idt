@@ -3,17 +3,29 @@ rootProject.name = "IDT"
 
 pluginManagement {
   repositories {
+    google {
+      content {
+        includeGroupByRegex("com\\.android.*")
+        includeGroupByRegex("com\\.google.*")
+        includeGroupByRegex("androidx.*")
+      }
+    }
     gradlePluginPortal()
     mavenCentral()
-    google()
   }
   includeBuild("build-logic")
 }
 
 dependencyResolutionManagement {
   repositories {
+    google {
+      content {
+        includeGroupByRegex("com\\.android.*")
+        includeGroupByRegex("com\\.google.*")
+        includeGroupByRegex("androidx.*")
+      }
+    }
     mavenCentral()
-    google()
   }
 }
 

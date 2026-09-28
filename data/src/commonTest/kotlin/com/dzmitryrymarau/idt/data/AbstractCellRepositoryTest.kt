@@ -113,13 +113,6 @@ abstract class AbstractCellRepositoryTest {
     }
 
   @Test
-  fun `updateContent throws IllegalArgumentException if content is blank`() = runTest {
-    assertFailsWith<IllegalArgumentException> {
-      repository.updateContent(sessionId = Uuid.NIL, row = -1, column = 0, content = " ")
-    }
-  }
-
-  @Test
   fun `updateContent updates the correct cell`() = runTest {
     val rows = 1
     val columns = 1

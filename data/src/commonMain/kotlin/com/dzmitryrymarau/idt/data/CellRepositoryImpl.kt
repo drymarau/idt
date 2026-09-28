@@ -39,7 +39,6 @@ public class CellRepositoryImpl(private val database: Database) : CellRepository
   override suspend fun updateContent(sessionId: Uuid, row: Int, column: Int, content: String) {
     require(row >= 0) { "row must be greater or equal to 0" }
     require(column >= 0) { "column must be greater or equal to 0" }
-    require(content.isNotBlank()) { "content must not be blank." }
     database.transaction {
       database.cellQueries.updateContent(
         sessionId = sessionId,

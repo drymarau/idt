@@ -1,16 +1,13 @@
 package com.dzmitryrymarau.idt.data
 
-import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import app.cash.sqldelight.db.SqlDriver
-import com.eygraber.sqldelight.androidx.driver.AndroidxSqliteDatabaseType
-import com.eygraber.sqldelight.androidx.driver.AndroidxSqliteDriver
+import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 
 actual class CellRepositoryTest : AbstractCellRepositoryTest() {
 
   actual override fun createDriver(): SqlDriver =
-    AndroidxSqliteDriver(
-      driver = BundledSQLiteDriver(),
-      databaseType = AndroidxSqliteDatabaseType.Memory,
+    JdbcSqliteDriver(
+      url = JdbcSqliteDriver.IN_MEMORY,
       schema = Database.Schema,
     )
 }

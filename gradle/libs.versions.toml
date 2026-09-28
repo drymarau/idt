@@ -6,7 +6,6 @@ kotlin = "2.4.20"
 kotlinx-coroutines = "1.11.0"
 metro = "1.4.4"
 sqldelight = "2.4.0"
-sqldelight-driver-androidx = "0.2.2"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version = "1.13.0" }
@@ -29,8 +28,9 @@ kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 metrox-android = { module = "dev.zacsweers.metro:metrox-android", version.ref = "metro" }
 metrox-viewmodel-compose = { module = "dev.zacsweers.metro:metrox-viewmodel-compose", version.ref = "metro" }
 sqldelight-adapters-primitive = { module = "app.cash.sqldelight:primitive-adapters", version.ref = "sqldelight" }
-sqldelight-driver-androidx = { module = "com.eygraber:sqldelight-androidx-driver", version.ref = "sqldelight-driver-androidx" }
-sqldelight-extensions-coroutines = { module = "com.eygraber:sqldelight-coroutines-extensions", version.ref = "sqldelight-driver-androidx" }
+sqldelight-driver-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
+sqldelight-driver-sqlite = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqldelight" }
+sqldelight-extensions-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
 turbine = { module = "app.cash.turbine:turbine", version = "1.2.1" }
 
 plugin-android = { module = "com.android.tools.build:gradle", version.ref = "android" }

@@ -2,11 +2,11 @@
 
 package com.dzmitryrymarau.idt.data
 
+import app.cash.sqldelight.coroutines.asFlow
+import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.turbine.test
 import com.dzmitryrymarau.idt.data.internal.Database
-import com.eygraber.sqldelight.androidx.driver.coroutines.asFlow
-import com.eygraber.sqldelight.androidx.driver.coroutines.mapToList
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
@@ -18,6 +18,7 @@ import kotlin.test.assertNotEquals
 import kotlin.test.assertTrue
 import kotlin.test.fail
 import kotlin.uuid.Uuid
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.runTest
 
 abstract class AbstractCellRepositoryTest {
@@ -32,7 +33,11 @@ abstract class AbstractCellRepositoryTest {
   fun setUp() {
     driver = createDriver()
     database = Database(driver)
-    repository = CellRepositoryImpl(database)
+    repository =
+      CellRepositoryImpl(
+        database = database,
+        coroutineContext = Dispatchers.IO.limitedParallelism(1),
+      )
   }
 
   @AfterTest
@@ -55,7 +60,7 @@ abstract class AbstractCellRepositoryTest {
   fun `populate fills the table with expected values`() = runTest {
     val rows = 3
     val columns = 2
-    database.cellQueries._select().asFlow().mapToList().test {
+    database.cellQueries._select().asFlow().mapToList(backgroundScope.coroutineContext).test {
       assertEquals(expected = emptyList(), actual = awaitItem())
       val sessionId1 =
         repository.populate(rows = rows, columns = columns) { row, column ->
@@ -116,7 +121,7 @@ abstract class AbstractCellRepositoryTest {
   fun `updateContent updates the correct cell`() = runTest {
     val rows = 1
     val columns = 1
-    database.cellQueries._select().asFlow().mapToList().test {
+    database.cellQueries._select().asFlow().mapToList(backgroundScope.coroutineContext).test {
       var cells = awaitItem()
       assertEquals(expected = emptyList(), actual = cells)
       val sessionId1 =
@@ -156,7 +161,7 @@ abstract class AbstractCellRepositoryTest {
   fun `updateChecked updates the correct cell`() = runTest {
     val rows = 1
     val columns = 1
-    database.cellQueries._select().asFlow().mapToList().test {
+    database.cellQueries._select().asFlow().mapToList(backgroundScope.coroutineContext).test {
       var cells = awaitItem()
       assertEquals(expected = emptyList(), actual = cells)
       val sessionId1 =
@@ -185,7 +190,7 @@ abstract class AbstractCellRepositoryTest {
   fun `clear deletes the contents of the table`() = runTest {
     val rows = 1
     val columns = 1
-    database.cellQueries._select().asFlow().mapToList().test {
+    database.cellQueries._select().asFlow().mapToList(backgroundScope.coroutineContext).test {
       var cells = awaitItem()
       assertEquals(expected = 0, actual = cells.size)
 
@@ -222,7 +227,7 @@ abstract class AbstractCellRepositoryTest {
   fun `clearAll deletes the contents of the table`() = runTest {
     val rows = 1
     val columns = 1
-    database.cellQueries._select().asFlow().mapToList().test {
+    database.cellQueries._select().asFlow().mapToList(backgroundScope.coroutineContext).test {
       var cells = awaitItem()
       assertEquals(expected = 0, actual = cells.size)
 

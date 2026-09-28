@@ -117,6 +117,7 @@ class KotlinAndroidApplicationPlugin : Plugin<Project> {
     target.configure<LicenseeExtension> {
       bundleAndroidAsset.set(true)
       allow(SpdxId.Apache_20)
+      allow(SpdxId.MIT)
     }
     target.dependencies {
       val module = kotlin("test-junit")

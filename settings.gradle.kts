@@ -38,3 +38,5 @@ include(":data")
 include(":design")
 
 include(":domain")
+
+include(":ui")

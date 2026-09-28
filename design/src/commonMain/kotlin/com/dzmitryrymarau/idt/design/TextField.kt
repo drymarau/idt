@@ -5,6 +5,10 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.style.Style
 import androidx.compose.foundation.style.animate
 import androidx.compose.foundation.style.contentPadding
 import androidx.compose.foundation.style.focused
@@ -43,37 +47,18 @@ public fun TextField(
     cursorBrush = SolidColor(colorScheme.accent),
     interactionSource = interactionSource,
     decorator = {
-      Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+      Column(
+        verticalArrangement = Arrangement.spacedBy(4.dp),
+        modifier = Modifier.width(IntrinsicSize.Max),
+      ) {
         BasicText(
           text = label,
-          modifier =
-            Modifier.styleable(
-              style = {
-                contentPaddingStart(4.dp)
-                textStyle(IdtTheme.Typography.Body)
-                contentColor(LocalColorScheme.currentValue.onBackground)
-              }
-            ),
+          modifier = Modifier.fillMaxWidth().styleable(style = LabelStyle),
         )
         Box(
           contentAlignment = Alignment.CenterStart,
           modifier =
-            Modifier.styleable(styleState = styleState) {
-              shape(IdtTheme.Shapes.Medium)
-              contentPadding(horizontal = 16.dp, vertical = 1.dp)
-              minHeight(56.dp)
-              borderWidth(1.dp)
-              val colorScheme = LocalColorScheme.currentValue
-              borderColor(colorScheme.onBackground)
-              contentColor(colorScheme.onBackground)
-              focused {
-                animate(tween()) {
-                  contentPadding(horizontal = 15.dp, vertical = 0.dp)
-                  borderWidth(2.dp)
-                  borderColor(colorScheme.accent)
-                }
-              }
-            },
+            Modifier.fillMaxWidth().styleable(styleState = styleState, style = TextFieldStyle),
         ) {
           it()
         }
@@ -83,9 +68,32 @@ public fun TextField(
   )
 }
 
+private val LabelStyle = Style {
+  contentPaddingStart(4.dp)
+  textStyle(IdtTheme.Typography.Body)
+  contentColor(LocalColorScheme.currentValue.onBackground)
+}
+
+private val TextFieldStyle = Style {
+  shape(IdtTheme.Shapes.Medium)
+  contentPadding(horizontal = 16.dp, vertical = 1.dp)
+  minHeight(56.dp)
+  borderWidth(1.dp)
+  val colorScheme = LocalColorScheme.currentValue
+  borderColor(colorScheme.onBackground)
+  contentColor(colorScheme.onBackground)
+  focused {
+    animate(tween()) {
+      contentPadding(horizontal = 15.dp, vertical = 0.dp)
+      borderWidth(2.dp)
+      borderColor(colorScheme.accent)
+    }
+  }
+}
+
 @PreviewTablet
 @Composable
 private fun TextFieldPreview() {
   val state = rememberTextFieldState("1")
-  TextField(state = state, label = "Label")
+  TextField(state = state, label = "Label", modifier = Modifier.width(192.dp))
 }

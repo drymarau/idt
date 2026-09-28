@@ -1,9 +1,11 @@
 package com.dzmitryrymarau.idt.domain
 
 import com.dzmitryrymarau.idt.data.CellRepository
+import dev.zacsweers.metro.Inject
 import kotlin.uuid.Uuid
 import kotlinx.coroutines.flow.Flow
 
+@Inject
 public class GetCellsUseCase(private val cellRepository: CellRepository) {
 
   public operator fun <T : Any> invoke(

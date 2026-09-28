@@ -3,6 +3,8 @@ package com.dzmitryrymarau.idt.design
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.style.Style
+import androidx.compose.foundation.style.contentPadding
+import androidx.compose.foundation.style.then
 import androidx.compose.foundation.text.selection.LocalTextSelectionColors
 import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.runtime.Composable
@@ -17,21 +19,21 @@ import com.dzmitryrymarau.idt.design.internal.LocalColorScheme
 
 public object IdtTheme {
 
-  public object Typography {
+  internal object Typography {
 
-    public val Body: TextStyle =
+    val Body =
       TextStyle(
         fontSize = 16.sp,
         fontWeight = FontWeight.W500,
         lineHeight = 24.sp,
       )
-    public val Title: TextStyle =
+    val Title =
       TextStyle(
         fontSize = 22.sp,
         fontWeight = FontWeight.W500,
         lineHeight = 28.sp,
       )
-    public val Headline: TextStyle =
+    val Headline =
       TextStyle(
         fontSize = 32.sp,
         fontWeight = FontWeight.W500,
@@ -42,6 +44,7 @@ public object IdtTheme {
   internal object Shapes {
 
     val Medium = RoundedCornerShape(8.dp)
+    val Large = RoundedCornerShape(16.dp)
   }
 
   public val ScreenStyle: Style = Style {
@@ -50,6 +53,13 @@ public object IdtTheme {
     background(colorScheme.background)
     contentColor(colorScheme.onBackground)
   }
+
+  public val DialogStyle: Style =
+    ScreenStyle then
+      Style {
+        contentPadding(24.dp)
+        shape(Shapes.Large)
+      }
 
   public val HeadlineStyle: Style = Style {
     textStyle(Typography.Headline)

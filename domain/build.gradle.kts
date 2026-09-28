@@ -1,6 +1,7 @@
 plugins {
   alias(libs.plugins.kotlin.multiplatform.library)
   alias(libs.plugins.kotlin.serialization)
+  alias(libs.plugins.metro)
 }
 
 kotlin {

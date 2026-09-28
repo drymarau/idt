@@ -2,6 +2,7 @@ package com.dzmitryrymarau.idt.design
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.style.Style
@@ -33,6 +34,7 @@ public fun Button(
     }
   Row(
     verticalAlignment = Alignment.CenterVertically,
+    horizontalArrangement = Arrangement.Center,
     content = content,
     modifier =
       modifier

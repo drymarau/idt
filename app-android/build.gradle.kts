@@ -7,8 +7,11 @@ plugins {
 android.defaultConfig.applicationId = "com.dzmitryrymarau.idt"
 
 dependencies {
-  implementation(project(":design"))
+  implementation(project(":data"))
+  implementation(project(":domain"))
+  implementation(project(":ui"))
   implementation(libs.androidx.activity.compose)
   implementation(libs.androidx.core.ktx)
   implementation(libs.metrox.android)
+  implementation(libs.metrox.viewmodel.compose)
 }

@@ -1,14 +1,17 @@
-package com.dzmitryrymarau.idt.data.internal
+package com.dzmitryrymarau.idt.data
 
-import com.dzmitryrymarau.idt.data.CellRepository
-import com.dzmitryrymarau.idt.data.Database
 import com.eygraber.sqldelight.androidx.driver.coroutines.asFlow
 import com.eygraber.sqldelight.androidx.driver.coroutines.mapToList
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesBinding
+import dev.zacsweers.metro.SingleIn
 import kotlin.uuid.Uuid
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 
-internal class CellRepositoryImpl(private val database: Database) : CellRepository {
+@SingleIn(AppScope::class)
+@ContributesBinding(AppScope::class)
+public class CellRepositoryImpl(private val database: Database) : CellRepository {
 
   override suspend fun populate(
     rows: Int,

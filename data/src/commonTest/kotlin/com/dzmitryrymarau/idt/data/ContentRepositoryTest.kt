@@ -1,6 +1,5 @@
 package com.dzmitryrymarau.idt.data
 
-import com.dzmitryrymarau.idt.data.internal.ContentRepositoryImpl
 import kotlin.random.Random
 import kotlin.test.BeforeTest
 import kotlin.test.Test

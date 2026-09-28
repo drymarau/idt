@@ -4,7 +4,6 @@ package com.dzmitryrymarau.idt.data
 
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.turbine.test
-import com.dzmitryrymarau.idt.data.internal.CellRepositoryImpl
 import com.dzmitryrymarau.idt.data.internal.Database
 import com.eygraber.sqldelight.androidx.driver.coroutines.asFlow
 import com.eygraber.sqldelight.androidx.driver.coroutines.mapToList

@@ -1,8 +1,8 @@
 package com.dzmitryrymarau.idt.design
 
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.style.Style
 import androidx.compose.foundation.style.checked
 import androidx.compose.foundation.style.contentPaddingHorizontal
@@ -18,6 +18,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.toggleableState
+import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.dp
 import com.dzmitryrymarau.idt.design.internal.LocalColorScheme
 
@@ -26,6 +29,7 @@ public fun Cell(
   text: String,
   checked: Boolean,
   onCheckedChange: (Boolean) -> Unit,
+  onDoubleClick: () -> Unit,
   modifier: Modifier = Modifier,
   enabled: Boolean = true,
 ) {
@@ -39,10 +43,13 @@ public fun Cell(
     contentAlignment = Alignment.Center,
     modifier =
       modifier
-        .toggleable(
+        .semantics {
+          toggleableState = ToggleableState(checked)
+        }
+        .combinedClickable(
           enabled = enabled,
-          value = checked,
-          onValueChange = onCheckedChange,
+          onClick = { onCheckedChange(!checked) },
+          onDoubleClick = onDoubleClick,
           interactionSource = interactionSource,
           indication = null,
         )
@@ -79,5 +86,5 @@ private val CellStyle = Style {
 @Composable
 private fun CellPreview() {
   var checked by remember { mutableStateOf(false) }
-  Cell(text = "Cell", checked = checked, onCheckedChange = { checked = it })
+  Cell(text = "Cell", checked = checked, onCheckedChange = { checked = it }, onDoubleClick = {})
 }

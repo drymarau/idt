@@ -2,8 +2,10 @@ package com.dzmitryrymarau.idt.domain
 
 import com.dzmitryrymarau.idt.data.CellRepository
 import com.dzmitryrymarau.idt.data.ContentRepository
+import dev.zacsweers.metro.Inject
 import kotlin.uuid.Uuid
 
+@Inject
 public class PopulateTableUseCase(
   private val cellRepository: CellRepository,
   private val contentRepository: ContentRepository,

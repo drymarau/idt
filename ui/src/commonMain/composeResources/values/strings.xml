@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_title">Create table</string>
+    <string name="home_rows_label">Rows (max 1000)</string>
+    <string name="home_columns_label">Columns (max 6)</string>
+    <string name="home_button_title">Create</string>
+    <string name="edit_title">Edit</string>
+    <string name="edit_label">Content</string>
+    <string name="edit_cancel">Cancel</string>
+    <string name="edit_confirm">Confirm</string>
+</resources>

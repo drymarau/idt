@@ -3,6 +3,7 @@ import com.android.build.api.variant.HasUnitTest
 plugins {
   alias(libs.plugins.kotlin.multiplatform.library)
   alias(libs.plugins.sqldelight)
+  alias(libs.plugins.metro)
 }
 
 kotlin {

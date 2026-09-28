@@ -39,6 +39,7 @@ class KotlinMultiplatformLibraryPlugin : Plugin<Project> {
           isIncludeAndroidResources = target.isIncludeAndroidResources
         }
       }
+      jvm()
       sourceSets.commonTest.dependencies { implementation(kotlin("test")) }
     }
   }

@@ -173,7 +173,7 @@ abstract class AbstractCellRepositoryTest {
         }
       assertNotEquals(illegal = Uuid.NIL, actual = sessionId1)
       cells = awaitItem()
-      assertFalse { cells.first { it.sessionId == sessionId1 }.checked }
+      assertFalse(cells.first { it.sessionId == sessionId1 }.checked)
 
       val sessionId2 =
         repository.populate(rows = rows, columns = columns) { row, column ->
@@ -181,11 +181,11 @@ abstract class AbstractCellRepositoryTest {
         }
       assertNotEquals(illegal = Uuid.NIL, actual = sessionId1)
       cells = awaitItem()
-      assertFalse { cells.first { it.sessionId == sessionId2 }.checked }
+      assertFalse(cells.first { it.sessionId == sessionId2 }.checked)
 
       repository.updatedChecked(sessionId = sessionId1, row = 0, column = 0, checked = true)
       cells = awaitItem()
-      assertTrue { cells.first { it.sessionId == sessionId1 }.checked }
+      assertTrue(cells.first { it.sessionId == sessionId1 }.checked)
     }
   }
 

@@ -6,6 +6,10 @@ gradlePlugin {
       id = "com.dzmitryrymarau.idt.kotlin.android.application"
       implementationClass = "com.dzmitryrymarau.idt.convention.KotlinAndroidApplicationPlugin"
     }
+    register("kotlinDesktopApplication") {
+      id = "com.dzmitryrymarau.idt.kotlin.desktop.application"
+      implementationClass = "com.dzmitryrymarau.idt.convention.KotlinDesktopApplicationPlugin"
+    }
     register("kotlinMultiplatformLibrary") {
       id = "com.dzmitryrymarau.idt.kotlin.multiplatform.library"
       implementationClass = "com.dzmitryrymarau.idt.convention.KotlinMultiplatformLibraryPlugin"

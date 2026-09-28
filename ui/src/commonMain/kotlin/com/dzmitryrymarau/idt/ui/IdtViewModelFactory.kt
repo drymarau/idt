@@ -1,4 +1,4 @@
-package com.dzmitryrymarau.idt.app.android
+package com.dzmitryrymarau.idt.ui
 
 import androidx.lifecycle.ViewModel
 import dev.zacsweers.metro.AppScope
@@ -13,7 +13,7 @@ import kotlin.reflect.KClass
 @Inject
 @SingleIn(AppScope::class)
 @ContributesBinding(AppScope::class)
-class IdtViewModelFactory(
+public class IdtViewModelFactory(
   override val viewModelProviders: Map<KClass<out ViewModel>, () -> ViewModel>,
   override val assistedFactoryProviders: Map<KClass<out ViewModel>, () -> ViewModelAssistedFactory>,
   override val manualAssistedFactoryProviders:

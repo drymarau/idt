@@ -33,6 +33,8 @@ plugins { id("com.dzmitryrymarau.idt.settings") }
 
 include(":app-android")
 
+include(":app-desktop")
+
 include(":data")
 
 include(":design")

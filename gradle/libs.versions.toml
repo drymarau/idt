@@ -23,6 +23,7 @@ compose-ui-tooling = { module = "org.jetbrains.compose.ui:ui-tooling", version.r
 compose-ui-tooling-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "compose" }
 detekt-compose = { module = "io.nlopez.compose.rules:detekt", version = "0.6.6" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version = "1.11.0" }
 metrox-android = { module = "dev.zacsweers.metro:metrox-android", version.ref = "metro" }
@@ -43,6 +44,7 @@ plugin-licensee = { module = "app.cash.licensee:licensee-gradle-plugin", version
 
 [plugins]
 kotlin-android-application = { id = "com.dzmitryrymarau.idt.kotlin.android.application" }
+kotlin-desktop-application = { id = "com.dzmitryrymarau.idt.kotlin.desktop.application" }
 kotlin-compose = { id = "com.dzmitryrymarau.idt.kotlin.compose" }
 kotlin-multiplatform-library = { id = "com.dzmitryrymarau.idt.kotlin.multiplatform.library" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

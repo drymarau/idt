@@ -1,7 +1,5 @@
 package com.dzmitryrymarau.idt.convention
 
-import app.cash.licensee.LicenseeExtension
-import app.cash.licensee.SpdxId
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.api.variant.impl.capitalizeFirstChar
@@ -24,7 +22,7 @@ class KotlinAndroidApplicationPlugin : Plugin<Project> {
     target.pluginManager {
       apply("com.android.application")
       apply("org.jetbrains.kotlin.plugin.parcelize")
-      apply("app.cash.licensee")
+      apply(LicenseePlugin::class)
       apply(DetektPlugin::class)
       apply(PowerAssertPlugin::class)
     }
@@ -113,11 +111,6 @@ class KotlinAndroidApplicationPlugin : Plugin<Project> {
       compilerOptions.optIn.addAll("kotlin.uuid.ExperimentalUuidApi")
       compilerOptions.progressiveMode.set(true)
       compilerOptions.freeCompilerArgs.addAll("-Xname-based-destructuring=complete")
-    }
-    target.configure<LicenseeExtension> {
-      bundleAndroidAsset.set(true)
-      allow(SpdxId.Apache_20)
-      allow(SpdxId.MIT)
     }
     target.dependencies {
       val module = kotlin("test-junit")

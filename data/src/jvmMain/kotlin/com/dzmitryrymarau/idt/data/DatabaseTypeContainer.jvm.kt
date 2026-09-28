@@ -10,6 +10,5 @@ import dev.zacsweers.metro.Provides
 @ContributesTo(scope = AppScope::class)
 public actual object DatabaseTypeContainer {
 
-  @Provides
-  public fun provide(): AndroidxSqliteDatabaseType = AndroidxSqliteDatabaseType.File("idt.db")
+  @Provides public fun provide(): AndroidxSqliteDatabaseType = AndroidxSqliteDatabaseType.Memory
 }

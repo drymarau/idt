@@ -226,6 +226,38 @@ abstract class AbstractCellRepositoryTest {
   }
 
   @Test
+  fun `clearAll deletes the contents of the table`() = runTest {
+    val rows = 1
+    val columns = 1
+    database.cellQueries._select().asFlow().mapToList().test {
+      var cells = awaitItem()
+      assertEquals(expected = 0, actual = cells.size)
+
+      val sessionId1 =
+        repository.populate(rows = rows, columns = columns) { row, column ->
+          (row * columns + column).toString()
+        }
+      assertNotEquals(illegal = Uuid.NIL, actual = sessionId1)
+      cells = awaitItem()
+      assertEquals(expected = 1, actual = cells.size)
+      assertEquals(expected = 1, actual = cells.count { it.sessionId == sessionId1 })
+
+      val sessionId2 =
+        repository.populate(rows = rows, columns = columns) { row, column ->
+          (row * columns + column).toString()
+        }
+      assertNotEquals(illegal = Uuid.NIL, actual = sessionId2)
+      cells = awaitItem()
+      assertEquals(expected = 2, actual = cells.size)
+      assertEquals(expected = 1, actual = cells.count { it.sessionId == sessionId2 })
+
+      repository.clearAll()
+      cells = awaitItem()
+      assertEquals(expected = 0, actual = cells.size)
+    }
+  }
+
+  @Test
   fun `getCells emits a list of Cell objects`() = runTest {
     val rows = 1
     val columns = 1

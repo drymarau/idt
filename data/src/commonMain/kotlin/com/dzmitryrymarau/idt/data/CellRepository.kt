@@ -17,6 +17,8 @@ public interface CellRepository {
 
   public suspend fun clear(sessionId: Uuid)
 
+  public suspend fun clearAll()
+
   public fun <T : Any> getCells(
     sessionId: Uuid,
     mapper: (sessionId: Uuid, row: Int, column: Int, content: String, checked: Boolean) -> T,

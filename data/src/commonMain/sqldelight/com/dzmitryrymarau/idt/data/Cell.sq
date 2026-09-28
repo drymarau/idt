@@ -26,5 +26,8 @@ UPDATE cell SET checked = ? WHERE sessionId = ? AND row = ? AND column = ?;
 delete:
 DELETE FROM cell WHERE sessionId = ?;
 
+deleteAll:
+DELETE FROM cell;
+
 _select:
 SELECT * FROM cell;

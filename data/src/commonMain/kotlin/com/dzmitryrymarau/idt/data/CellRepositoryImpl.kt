@@ -74,6 +74,12 @@ public class CellRepositoryImpl(private val database: Database) : CellRepository
     }
   }
 
+  override suspend fun clearAll() {
+    database.transaction {
+      database.cellQueries.deleteAll()
+    }
+  }
+
   override fun <T : Any> getCells(
     sessionId: Uuid,
     mapper: (sessionId: Uuid, row: Int, column: Int, content: String, checked: Boolean) -> T,

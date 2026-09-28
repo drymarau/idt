@@ -29,6 +29,8 @@ abstract class StubCellRepository : CellRepository {
 
   override suspend fun clear(sessionId: Uuid): Unit = fail()
 
+  override suspend fun clearAll(): Unit = fail()
+
   override fun <T : Any> getCells(
     sessionId: Uuid,
     mapper: (sessionId: Uuid, row: Int, column: Int, content: String, checked: Boolean) -> T,

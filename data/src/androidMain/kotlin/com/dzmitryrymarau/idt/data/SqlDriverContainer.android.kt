@@ -18,7 +18,7 @@ public actual object SqlDriverContainer {
   public fun provide(application: Application): SqlDriver =
     AndroidSqliteDriver(
       context = application,
-      name = "idb.db",
+      name = "idt.db",
       schema = Database.Schema,
     )
 }

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <supports-screens android:requiresSmallestWidthDp="600" />
+
     <application
         android:name="com.dzmitryrymarau.idt.app.android.IdtApplication"
         android:allowBackup="true"
